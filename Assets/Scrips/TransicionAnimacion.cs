@@ -5,8 +5,8 @@ using UnityEngine;
 public class TransicionAnimacion : MonoBehaviour
 {
     public float velocidad = 0.0f;
-    public float aceleracion = 0.1f;
-    public float desaceleracion = 0.01f;
+    public float aceleracion = 0.01f;
+    public float desaceleracion = 0.1f;
     Animator anim;
     // Start is called before the first frame update
     void Start()
