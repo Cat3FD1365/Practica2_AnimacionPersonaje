@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TransicionAnimacion : MonoBehaviour
 {
+    public float velocidad = 0.0f;
+    public float aceleracion = 0.1f;
+    public float desaceleracion = 0.5f;
     Animator anim;
     // Start is called before the first frame update
     void Start()
@@ -14,29 +17,30 @@ public class TransicionAnimacion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("w"))
+        bool moverseoprimido = Input.GetKey("p");
+        bool danceoprimido = Input.GetKey("space");
+
+        if (moverseoprimido && velocidad < 1.0f)
         {
-            anim.SetBool("SeMueve", true);
+            velocidad += Time.deltaTime * aceleracion;
         }
-        if (!Input.GetKey("w"))
+        if (!moverseoprimido && velocidad >0.0f)
         {
-            anim.SetBool("SeMueve", false);
+            velocidad -= Time.deltaTime * desaceleracion;
         }
-        if (Input.GetKey("d"))
+        if (!moverseoprimido && velocidad < 0.0f)
+        {
+            velocidad = 0.0f;
+        }
+        if (danceoprimido)
         {
             anim.SetBool("Baila", true);
         }
-        if (!Input.GetKey("d"))
+        if (!danceoprimido)
         {
             anim.SetBool("Baila", false);
         }
-        if (Input.GetKey("space"))
-        {
-            anim.SetBool("Corre", true);
-        }
-        if (!Input.GetKey("space"))
-        {
-            anim.SetBool("Corre", false);
-        }
+
+        anim.SetFloat("Velocidad", velocidad);
     }
 }
